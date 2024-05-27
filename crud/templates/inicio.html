@@ -1,0 +1,134 @@
+{# Esto es un comentario #}
+{% extends "index.html" %}
+{# definir contenidos que tendrán cada uno de los bloques #}
+{% block script %} <script>
+  $(function()
+  {
+      $('#modal').click();
+  });
+</script> {% endblock %}
+{% block tituloPestana %} 
+    Inicio
+{% endblock %}
+{% block tituloPagina %} 
+    <div class="text-center mt-5">
+        <h1></h1>
+    </div>
+{% endblock %}
+
+{% block mensaje %} 
+{% if mensaje %}
+    <div class="alert alert-success mt-5" role="alert">
+        {{ mensaje }}
+    </div>
+{% elif error %}
+    <div class="alert alert-danger mt-5" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
+{% endblock %}
+{% block contenido %} 
+<br>
+<button hidden type="button" id="modal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Suscripción</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Suscribete para obtener descuentos imperdibles.
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'donar' %}"><button type="button" class="btn btn-primary">Suscribirse</button></a>
+      </div>
+    </div>
+  </div>
+</div> -->
+          <h2 class="text-center mt-4 p-2 text-secondary">Categorias</h2>
+          <div class="container mt-3 border p-2 shadow bg-light">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="2500"><a href="{%url 'productos'%}">
+                  <img src="/static/images/im1.jpg" class="d-block w-100" alt="...">
+                </a>
+                  <div class="carousel-caption d-none d-md-block">
+                  </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2500"><a href="{%url 'productos'%}">
+                  <img src="/static/images/chur.webp" class="d-block w-100" alt="...">
+                </a>
+                  <div class="carousel-caption d-none d-md-block">
+                  </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2500"><a href="{%url 'productos'%}">
+                  <img src="/static/images/gatos.webp" class="d-block w-100 " height="300" alt="...">
+                </a>
+                  <div class="carousel-caption d-none d-md-block">
+                  </div>
+                </div> 
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+            <div class="container-fluid mt-5">
+              <div class="row offset-md-2 m-5 p-3">
+                <div class="card offset-md-1 col-md-2 p-2" style="width: 18rem;">
+                  <img src="/static/images/churu-pollo.webp" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <p class="card-text descripcion-larga">El Churu de pollo con sabor a cangrejo de 56gr es un snack para gatos que puede lamerse, hecha con pollo y cangrejo, cuenta con una textura cremosa y un sabor sabroso que tu bebe no podrá resistir.</p>
+                    <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+                  </div>
+                </div>
+                <div class="card col-md-2 offset-md-1 p-1" style="width: 18rem;">
+                  <img src="/static/images/collar.jpeg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <p class="card-text descripcion-larga " >collar para gatos de alta calidad.</p>
+                    <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+                  </div>
+              </div>
+              <div class="card col-md-2 offset-md-1 p-1" style="width: 18rem;">
+                <img src="/static/images/mazuri-rat-.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text">Mazuri Rata y Ratones, ha sido formulada específicamente para estos animales sólo con ingredientes vegetales.</p>
+                  <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+                </div>
+            </div>
+                <div class="card col-md-2 offset-md-1 p-1" style="width: 18rem;">
+                  <img src="/static/images/manta.jpeg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <p class="card-text descripcion-larga">Manta TM Polar SIMPLE Talla L Animal Print 100×150 es una manta de polar para perros y gatos, perfecta para que tu mascota pueda recostarse en el sofá junto a ti.</p>
+                    <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+                  </div>
+              </div>
+              <div class="card col-md-2 offset-md-1 p-1" style="width: 18rem;">
+                <img src="/static/images/dermatology.webp" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text descripcion-larga">El alimento Virbac HPM adult dermatology support 3kg es un alimento medicado para perros indicado para el apoyo de la función dérmica en caso de dermatosis y pérdida excesiva de pelo. Dieta rica en proteínas 34% (con 88% de proteínas animales) y baja en carbohidratos 26,5%..</p>
+                  <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+                </div>
+            </div>
+            <div class="card col-md-2 offset-md-1 p-1" style="width: 18rem;">
+              <img src="/static/images/comederogato.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text ">COMEDERO DOBLE DISEÑO GATO es un novedoso comedero en forma de gatito con 2 contenedores, ideal para el agua y la comida.</p>
+                <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+              </div>
+          </div>
+            </div>
+{% endblock %}
+{% block listado %} 
+{% endblock %}

@@ -1,0 +1,85 @@
+{# Esto es un comentario #}
+{% extends "index.html" %}
+{# definir contenidos que tendrán cada uno de los bloques #}
+{% block script %} 
+<script src="/static/javascript/donar.js"></script>
+{% endblock %}
+{% block tituloPestana %} 
+    Donaciones
+{% endblock %}
+{% block tituloPagina %} 
+    <div class="text-center mt-5">
+        <h1>Donaciones</h1>
+    </div>
+{% endblock %}
+
+{% block mensaje %} 
+{% if mensaje %}
+    <div class="alert alert-success mt-5" role="alert">
+        {{ mensaje }}
+    </div>
+{% elif error %}
+    <div class="alert alert-danger mt-5" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
+{% endblock %}
+{% block contenido %} 
+<br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 off-md-4">
+                <div class="signup-form">
+                    <form action="{%url 'donar' %}" method="POST" autocomplete="off" class="mt-5 border p-4 bg-light shadow">
+                        {% csrf_token %}
+                        <h3 class="mb-4">Donar</h3>
+                        <div class="col-md-12 mt-2 mb-2">
+                            <input type="hidden" name="txtId" value="{{fila.id}}">
+                            <input type="text" hidden name="txtUser" class="txtUser" value="{{user.username}}">
+                            <label for="txtDonacion" class="text-secondary">Donación</label>
+                            <input type="text" id="txtDonacion" placeholder="Ej: 1.000.000" class="txtDonacion form-control">
+                        </div>
+                            <div class="col-md-12 mt-2 mb-2">
+                                <label for="cmbMPago" class="text-secondary">Tipo de pago </label>
+                                <select name="cmbMPago" id="cmbMPago" class="cmbMPago form-select">
+                                    <option hidden value="0">Seleccione una opción</option>
+                                    {% if payCategories %}
+                                        {% for tipoPago in payCategories %}
+                                            {% if tipoPago.activo %}
+                                                <option value="{{tipoPago.id}}">{{tipoPago.nombreTipoPago}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                            {%if user.suscrito%}
+                        <div class="offset-md-2 row">
+                            <div class="mt-4 col-md-3">
+                                <button class="p-2 btn btn-outline-success btnEnviar form-control">Donar</button>
+                            </div>
+                            <div class="mt-4 col-md-3">
+                                <input type="reset" class="p-2 btn btn-outline-danger form-control" value="Limpiar">
+                            </div>
+                                <div class="mt-4 col-md-3">
+                                    <button class="p-2 btn btn-outline-info btnDeSus form-control">Cancelar Suscripcion</button>
+                                </div>
+                        </div>
+                        {%else%}
+                        <div class="offset-md-4 row">
+                            <div class="mt-4 col-md-3">
+                                <button class="p-2 btn btn-outline-success btnEnviar form-control">Donar</button>
+                            </div>
+                            <div class="mt-4 col-md-3">
+                                <input type="reset" class="p-2 btn btn-outline-danger form-control" value="Limpiar">
+                            </div>
+                        </div>
+                        {%endif%}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block listado %} 
+{% endblock %}

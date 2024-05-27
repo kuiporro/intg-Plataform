@@ -1,0 +1,158 @@
+{# Esto es un comentario #}
+{% extends "index.html" %}
+{# definir contenidos que tendrán cada uno de los bloques #}
+{% block script %} 
+<script src="/static/javascript/producto.js"></script>
+{% endblock %}
+{% block tituloPestana %} 
+    CRUD Producto
+{% endblock %}
+{% block tituloPagina %} 
+    <div class="text-center mt-5">
+        <h1>Registro Producto</h1>
+    </div>
+{% endblock %}
+
+{% block mensaje %} 
+{% if mensaje %}
+    <div class="alert alert-success mt-5" role="alert">
+        {{ mensaje }}
+    </div>
+{% elif error %}
+    <div class="alert alert-danger mt-5" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
+{% endblock %}
+{% block contenido %} 
+<br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 off-md-4">
+                <div class="signup-form">
+                    <form action="{%url 'producto' %}" method="POST" autocomplete="off" class="mt-5 border p-4 bg-light shadow" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h3 class="mb-4">Registrar Producto</h3>
+                        <div class="mb-3 col-md-12">
+                            <input type="hidden" name="txtId" value="{{fila.id}}">
+                            <label for="txtCode">Código Producto<span class="text-danger">*</span></label>
+                            <input type="text" id="txtCode" name="txtCode" placeholder="Ingrese el codigo del producto" class="txtCode form-control" value="{{ fila.codigoProducto }}">
+                        </div>
+                        <div class="mb-3 col-md-12">
+                            <label for="txtNombre">Nombre Producto<span class="text-danger">*</span></label>
+                            <input type="text" id="txtNombre" name="txtNombre" placeholder="Ingrese el nombre del producto" class="txtNombre form-control" value="{{ fila.nombreProducto }}">
+                        </div>
+                        <div class="mb-3 col-md-12">
+                            <label for="txtDesc">Descripción Producto<span class="text-danger">*</span></label>
+                            <input type="text" id="txtDesc" name="txtDesc" placeholder="Ingrese una descripción para el Producto" class="txtDesc form-control" value="{{ fila.descripcionProducto }}">
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label for="ctProducto">Categoria Producto <span class="text-danger">*</span></label>
+                                <select name="ctProducto" class="ctProducto form-select" id="ctProducto" value="{{ fila.nombreCategoria }}">
+                                 option selected class="ctProducto" hidden value="0">Seleccione una categoria</option>
+                                    {% if productCategories %}
+                                    {% for fila in productCategories %}
+                                    {% if fila.activo %}
+                                      <option value="{{fila.id}}">{{fila.nombreCategoria}}</option>
+                                    {% endif %}
+                                      {% endfor %}
+                                  {% endif %}
+                                </select>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="ctMarca">Marca Producto<span class="text-danger">*</span></label>
+                                <select selected name="ctMarca" class="ctMarca form-select" id="ctMarca" value="{{ fila.marcaProducto }}">
+                                  <option class="ctMarca" hidden value="0">Seleccione una marca</option>
+                                    {% if productBrand %}
+                                    {% for fila in productBrand %}
+                                    {% if fila.activo %}
+                                      <option value="{{fila.id}}">{{fila.nombreMarca}}</option>
+                                    {% endif %}
+                                      {% endfor %}
+                                  {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="txtPrecio">Precio Producto<span class="text-danger">*</label>
+                            <input type="text" id="txtPrecio" name="txtPrecio" placeholder="Ingrese el precio del producto" class="txtPrecio form-control" value="{{ fila.precioProducto }}">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="txtStock">Stock Producto<span class="text-danger">*</label>
+                            <input type="number" id="txtStock" name="txtStock" placeholder="Ingrese el stock del producto" class="txtStock form-control" value="{{ fila.stockProducto }}">
+                        </div>
+                      </div>
+                      <div class="mb-3 col-md-12">
+                        <label for="txtCosto">Precio Costo<span class="text-danger">*</label>
+                        <input type="text" id="txtCosto" name="txtCosto" placeholder="Ingrese el costo del producto" class="txtCosto form-control" value="{{ fila.precioCosto}}">
+                    </div>
+                      <div class="mb-3 col-md-12">
+                        <label class="form-check-label" for="chkActivo">Activo</label>
+                        <input type="checkbox" name="chkActivo" id="chkActivo" class="form-check-input" {% if fila.activo %}{{ 'checked' }}{% endif %}>
+                    </div>
+                    <div class="mb-3 col-md-12">
+                        <label class="form-label" for="img">Imagen</label>
+                        <input type="file" name="img" id="img" class="img" accept="image/*" class="img form-control">
+                    </div>
+                        <div class="row">
+                          <div class="col-md-4 mt-3">
+                            <input type="submit" name="btnCreate" class="btnCreate btn btn-outline-success form-control" value="Registrar Producto">
+                          </div>
+                          <div class="col-md-4 mt-3">
+                            <input type="submit" name="btnRead" class="btnRead btn btn-outline-secondary form-control" value="Listar Productos">
+                          </div>
+                          <div class="col-md-4 mt-3">
+                            <input type="submit" name="btnDelete" class="btnDelete btn btn-outline-danger form-control" value="Eliminar Producto">
+                          </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block listado %} 
+{% if listado %}
+<div class="container">
+    <div class="text-center mt-5">
+        <div class="col-md-12 table-responsive">
+            <table class="table table-light table-striped">
+                <tr class="table-dark">
+                    <th>Id</th>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Categoria</th>
+                    <th>Marca</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Costo</th>
+                    <th>Img</th>
+                    <th>Activo</th>
+                                    
+                    <th>Editar</th>
+                </tr>
+    {% for fila in listado %}
+                <tr>
+                    <td>{{ fila.id }}</td>
+                    <td>{{ fila.codigoProducto }}</td>
+                    <td>{{ fila.nombreProducto }}</td>
+                    <td>{{ fila.descripcionProducto }}</td>
+                    <td>{{ fila.categoriaProducto }}</td>
+                    <td>{{ fila.marcaProducto }}</td>
+                    <td>{{ fila.precioProducto }}</td>
+                    <td>{{ fila.stockProducto }}</td>
+                    <td>{{ fila.precioCosto }}</td>
+                    <td>{{ fila.imagen }}</td>
+                    <td>{{ fila.activo }}</td>
+                    <td><a href="{% url 'producto' %}/{{ fila.id }}/">Editar</a></td>
+                </tr>
+    {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{%endif%}
+{% endblock %}

@@ -1,0 +1,74 @@
+{# Esto es un comentario #}
+{% extends "index.html" %}
+{# definir contenidos que tendrán cada uno de los bloques #}
+{% block script %} 
+<script src="/static/javascript/comprar.js"></script>
+{% endblock %}
+{% block tituloPestana %} 
+    CRUD Categoria
+{% endblock %}
+{% block tituloPagina %} 
+    <div class="text-center mt-5">
+        <h1></h1>
+    </div>
+{% endblock %}
+
+{% block mensaje %} 
+{% if mensaje %}
+    <div class="alert alert-success mt-5" role="alert">
+        {{ mensaje }}
+    </div>
+{% elif error %}
+    <div class="alert alert-danger mt-5" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
+{% endblock %}
+{% block contenido %} 
+<br>
+<div class="container">
+    <div class="row">
+    <div class="col-md-4">
+    <img src="{{fila.imagen.url}}" class="img-fluid" alt="img.producto">
+    </div>
+    <div class="col-md-3 mt-2">
+        <h3 class="text-dark text-center mb-3">{{fila.nombreProducto}}</h3>
+        <h6 class="text-dark">Descripción: <span class="text-secondary text-break">{{fila.descripcionProducto}}.</span></h6>
+        {%for categoria in productCategories%}
+        {% if fila.categoriaProducto == categoria.id %}
+        <h6 class="text-dark">Categoria: <span class="text-secondary">{{categoria.nombreCategoria}}</span></h6>
+        {%endif%}
+        {%endfor%}
+        {%for marca in productBrand%}
+        {% if fila.marcaProducto == marca.id %}
+        <h6 class="text-dark">Marca: <span class="text-secondary">{{marca.nombreMarca}}</span></h6>
+        {%endif%}
+        {%endfor%}
+        {%if user.suscrito%}
+        <h6 class="text-dark">Precio: <span class="text-secondary PriceDesc">${{fila.precioProducto}}</span></h6>
+        {%else%}
+        <h6 class="text-dark">Precio: <span class="text-secondary Price">${{fila.precioProducto}}</span></h6>
+        {%endif%}
+        <h6 class="text-dark">Stock: <span class="text-secondary">{{fila.stockProducto}}</span></h6>
+    </div>
+</div>
+<div class="row">
+    <div class="offset-md-4 col-md-4">
+                <a href="{%url 'Add' fila.id%}">
+                <button type="button" class="btn-outline-primary m-2 col-md-2"><svg class="bi" width="22" height="22" fill="currentColor">
+                <use xlink:href="/static/images/bootstrap-icons/bootstrap-icons.svg#cart4"/>
+                </svg></button></a>
+                <input class="col-md-2 text-center txtStock" value="1" type="text" name="txtStock" id="txtStock">
+                {% if user.is_authenticated %}
+                <a href="{%url 'HAdd' fila.id%}">
+                <button class="btnComprar btn btn-outline-success m-2 col-md-4">Comprar</button>
+                </a>
+                {%else%}
+                <button class="btnComprarLogout btn btn-outline-success m-2 col-md-4">Comprar</button>
+                {%endif%}
+    </div>
+    </div>
+</div>
+{% endblock %}
+{% block listado %} 
+{% endblock %}

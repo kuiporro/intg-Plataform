@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetShopFriend</title>
+    <link rel="icon" type="imagen/x-icon" href="/static/images/icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/static/javascript/carrito.js"></script></head>
+    <script src="/static/javascript/index.js"></script>
+
+    {% block script %} {% endblock %}
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 col-md-12">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{% url 'inicio' %}">
+                  <img src="/static/images/icon.png" width="35" height="35" alt="icon">PetShopFriend
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'productos' %}">Productos</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Usuario
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      {%if user.is_authenticated%}
+                      <li><a class="dropdown-item" href="{%url 'historial'%}">Historial de Compras</a></li>
+                      {%else%}
+                      <li><a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesion</a></li>
+                      <li><a class="dropdown-item" href="{% url 'signin' %}">Registrarse</a></li>
+                      {%endif%}
+                    </ul>
+                  </li>
+                  {% if user.is_authenticated %}
+                  {% if user.is_superuser %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      CRUD
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="{% url 'usuario'  %}" tabindex="-1" aria-disabled="true">Usuario</a></li>
+                      <li><a class="dropdown-item" href="{% url 'producto'  %}" tabindex="-1" aria-disabled="true">Producto</a></li>
+                      <li><a class="dropdown-item" href="{% url 'marca'  %}" tabindex="-1" aria-disabled="true">Marca</a></li>
+                      <li><a class="dropdown-item" href="{% url 'categoria'  %}" tabindex="-1" aria-disabled="true">Categoria</a></li>
+                      <li><a class="dropdown-item" href="{% url 'tipoPago'  %}" tabindex="-1" aria-disabled="true">Tipo de Pago</a></li>
+                      <li><a class="dropdown-item" href="{% url 'tipoUsuario'  %}" tabindex="-1" aria-disabled="true">Tipo de Usuario</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'api' %}" tabindex="-1" aria-disabled="true">API</a>
+                  </li>
+                  {%endif%}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'donar' %}" tabindex="-1" aria-disabled="true">Donar</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{%url 'logout' %}" tabindex="-1" aria-disabled="true">Cerrar Sesión</a>
+                  </li>
+                  {%endif%}
+                </ul>
+              </div>
+              <form class="d-flex">
+                <a class="m-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" role="button"
+                ><svg class="bi" width="22" height="22" fill="currentColor">
+                  <use xlink:href="/static/images/bootstrap-icons/bootstrap-icons.svg#cart4"/>
+                </svg></a>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                  <div class="offcanvas-header">
+                    <h5 id="offcanvasRightLabel"><span class="text-dark h2">Carrito de compras</span></h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body">
+                    <div class="alert alert-default" role="alert" >
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th class="table-light" scope="row" colspan="3" class="text-centers">
+                              Carrito
+                            </th>
+                          </tr>
+                          <th class="table-dark">Nombre</th>
+                          <th class="table-dark">Precio</th>
+                          <th class="table-dark">Cantidad</th>
+                        </thead>
+                        <tbody>
+                          {%if request.session.carrito.items%}
+                          {%for key, value in request.session.carrito.items%}
+                          <tr>
+                            <td hidden class="product_id">{{value.producto_id}}:{{value.cantidad}}</td>
+                            <td class="table-dark">{{value.nombre}}</td>
+                            {%if user.suscrito%}
+                            <td class="table-dark PriceDesc">${{value.acumulado}}</td>
+                            {%else%}
+                            <td class="table-dark Price">${{value.acumulado}}</td>
+                            {%endif%}
+                            <td class="table-dark">
+                              {{value.cantidad}}
+                              <a href="{%url 'Add' value.producto_id %}" class="badge btn btn-success badge-dark">+</a>
+                              <a href="{%url 'Sub' value.producto_id %}" class="badge btn btn-danger badge-dark">-</a>
+                            </td>
+                          </tr>
+                          {%endfor%}
+                          {%else%}
+                          <tr class="table-dark">
+                            <td colspan="3">
+                              <div class="mt-3 alert alert-danger text-center">Sin Productos</div>
+                            </td>
+                          </tr>
+                          {%endif%}
+                          <tr class="table-dark">
+                            <th>Total:</th>
+                            {%if user.suscrito %}
+                            <td colspan="3" class="PriceDesc">${{total_carrito}}</td>
+                            {%else%}
+                            <td colspan="3" class="Price">${{total_carrito}}</td>
+                            {%endif%}
+                          </tr>
+                        </tbody>
+                      </table>
+                      <hr>
+                      <div class="row text-center">
+                        <div class="col-md-6">
+                          <a href="{%url 'CLS'%}" class="btnLimpiar btn btn-danger">Limpiar</a>
+                        </div>
+                        {%if user.is_authenticated%}
+                          <div class="col-md-6">
+                            <a href="#" class="btnPagarCarrito btn btn-success">Pagar</a>
+                          </div>
+                        {%else%}
+                          <div class="col-md-6">
+                            <a href="{%url 'login'%}" class="btnPagarCarritoLogout btn btn-success">Pagar</a>
+                          </div>
+                        {%endif%}
+                      </div>
+                    </div>
+              </form>
+            </div>
+          </nav>    
+    </header>
+    <article>
+        <section>
+                {% block tituloPagina %} {% endblock %}
+                {% block mensaje %} {% endblock %}
+                {% block contenido %} {% endblock %}
+                {% block listado %} {% endblock %}
+        </section>
+    </article>
+    <footer class="bg-dark text-center text-white p-1 mt-4">
+      <div class="container-fluid p-4 pb-0">
+        <section class="mb-4">
+          <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/" role="button"
+            ><svg class="bi" width="22" height="22" fill="currentColor">
+              <use xlink:href="/static/images/bootstrap-icons/bootstrap-icons.svg#facebook"/>
+            </svg></a>
+          <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/" role="button"
+          ><svg class="bi" width="22" height="22" fill="currentColor">
+            <use xlink:href="/static/images/bootstrap-icons/bootstrap-icons.svg#twitter"/>
+          </svg></a>
+          <a class="btn btn-outline-light btn-floating m-1" href="https://www.google.com/" role="button"
+          ><svg class="bi" width="22" height="22" fill="currentColor">
+            <use xlink:href="/static/images/bootstrap-icons/bootstrap-icons.svg#google"/>
+          </svg></a>
+          <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/" role="button"
+          ><svg class="bi" width="22" height="22" fill="currentColor">
+            <use xlink:href="/static/images/bootstrap-icons/bootstrap-icons.svg#instagram"/>
+          </svg></a>
+          <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/" role="button"
+          ><svg class="bi" width="22" height="22" fill="currentColor">
+            <use xlink:href="/static/images/bootstrap-icons/bootstrap-icons.svg#linkedin"/>
+          </svg></a>
+          <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/" role="button"
+          ><svg class="bi" width="22" height="22" fill="currentColor">
+            <use xlink:href="/static/images/bootstrap-icons/bootstrap-icons.svg#github"/>
+          </svg></a>
+        </div>
+        </section>
+      </div>
+      <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Copyright:
+        <a class="text-white" href="https://google.com/">PetShopFriend.cl/</a>
+      </div>
+    </footer> 
+</body>
+</html>

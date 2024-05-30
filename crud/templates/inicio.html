@@ -28,9 +28,9 @@
 {% endif %}
 {% endblock %}
 {% block contenido %} 
-<br>
+<!-- <br>
 <button hidden type="button" id="modal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -46,7 +46,7 @@
     </div>
   </div>
 </div> -->
-          <h2 class="text-center mt-4 p-2 text-secondary">Categorias</h2>
+          <h2 class="text-center mt-4 p-2 text-secondary"> NUESTRAS OFERTAS ESPECIALES!! </h2>
           <div class="container mt-3 border p-2 shadow bg-light">
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-indicators">
@@ -56,23 +56,24 @@
               </div>
               <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="2500"><a href="{%url 'productos'%}">
-                  <img src="/static/images/im1.jpg" class="d-block w-100" alt="...">
+                  <img src="/static/images/Stanley.jpg" class="d-block w-100" height="400" alt="...">
                 </a>
                   <div class="carousel-caption d-none d-md-block">
                   </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="2500"><a href="{%url 'productos'%}">
-                  <img src="/static/images/chur.webp" class="d-block w-100" alt="...">
+                  <img src="/static/images/Makita.jpg" class="d-block w-100" height="400" alt="...">
                 </a>
                   <div class="carousel-caption d-none d-md-block">
                   </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="2500"><a href="{%url 'productos'%}">
-                  <img src="/static/images/gatos.webp" class="d-block w-100 " height="300" alt="...">
+                  <img src="/static/images/bosch.jpg" class="d-block w-100" height="400" alt="...">
                 </a>
                   <div class="carousel-caption d-none d-md-block">
                   </div>
-                </div> 
+                </div>
+                
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -87,45 +88,56 @@
             <div class="container-fluid mt-5">
               <div class="row offset-md-2 m-5 p-3">
                 <div class="card offset-md-1 col-md-2 p-2" style="width: 18rem;">
-                  <img src="/static/images/churu-pollo.webp" class="card-img-top" alt="...">
+                  <img src="/static/images/Taladro Percutor Bosch.jpg" class="card-img-top" alt="...">
                   <div class="card-body">
-                    <p class="card-text descripcion-larga">El Churu de pollo con sabor a cangrejo de 56gr es un snack para gatos que puede lamerse, hecha con pollo y cangrejo, cuenta con una textura cremosa y un sabor sabroso que tu bebe no podrá resistir.</p>
-                    <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+                    <div class="mt-auto"><p class="card-text descripcion-larga">Taladro Percutor Bosch<p>
+                      <p class="card-text descripcion-larga">El taladro percutor y atornillador inalámbrico GSB 185-LI de Bosch es rápido, liviano y cómodo, ideal para trabajos exigentes. <p> 
+                      </div>   
+                    <a href="{%url 'productos'%}" class="btn btn-primary">Ver productos</a>
                   </div>
                 </div>
                 <div class="card col-md-2 offset-md-1 p-1" style="width: 18rem;">
-                  <img src="/static/images/collar.jpeg" class="card-img-top" alt="...">
+                  <img src="/static/images/Sierra circular Makita.avif" class="card-img-top" alt="...">
                   <div class="card-body">
-                    <p class="card-text descripcion-larga " >collar para gatos de alta calidad.</p>
-                    <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+                    <p class="card-text descripcion-larga " >Sierra Circular Makita</p>
+                    <p class="card-text descripcion-larga">Ligero y compacto.
+                      El gatillo de seguridad doble evitará un arranque accidental, es fácil de operar incluso con las manos enguantadas y se puede operar desde ambos lados del mango. <p> 
+                        <div class="mt-auto">
+                          <a href="{% url 'productos' %}" class="btn btn-primary">Ver productos</a>
+                        </div>
                   </div>
               </div>
               <div class="card col-md-2 offset-md-1 p-1" style="width: 18rem;">
-                <img src="/static/images/mazuri-rat-.jpg" class="card-img-top" alt="...">
+                <img src="/static/images/herramientas stanley.avif" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <p class="card-text">Mazuri Rata y Ratones, ha sido formulada específicamente para estos animales sólo con ingredientes vegetales.</p>
-                  <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+                  <p class="card-text"> Juego herramientas mecánicas 120 piezas STANLEY </p>
+                  <p class="card-text descripcion-larga">Herramientas con medidas en pulgadas y milímetros
+                    Fabricados en acero Cromo Vanadio. Acabado en cromo para brindar una resistencia excepcional al óxido. <p> 
+                  <a href="{%url 'productos'%}" class="btn btn-primary">Ver productos</a>
                 </div>
             </div>
                 <div class="card col-md-2 offset-md-1 p-1" style="width: 18rem;">
-                  <img src="/static/images/manta.jpeg" class="card-img-top" alt="...">
+                  <img src="/static/images/sikaflex.webp" class="card-img-top" alt="...">
                   <div class="card-body">
-                    <p class="card-text descripcion-larga">Manta TM Polar SIMPLE Talla L Animal Print 100×150 es una manta de polar para perros y gatos, perfecta para que tu mascota pueda recostarse en el sofá junto a ti.</p>
-                    <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+                    <p class="card-text descripcion-larga"> Sikaflex-291 </p>
+                    <p class="card-text descripcion-larga"> Sikaflex-291 es un sellante de poliuretano de un componente de alta calidad, especialmente desarrollado para el mercado marino, altamente adhesivo y que al ser expuesto a la humedad atmosférica cura formando un elástico durable y resistente. <p> 
+                    <a href="{%url 'productos'%}" class="btn btn-primary">Ver productos</a>
                   </div>
               </div>
               <div class="card col-md-2 offset-md-1 p-1" style="width: 18rem;">
-                <img src="/static/images/dermatology.webp" class="card-img-top" alt="...">
+                <img src="/static/images/atornilladores.webp" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <p class="card-text descripcion-larga">El alimento Virbac HPM adult dermatology support 3kg es un alimento medicado para perros indicado para el apoyo de la función dérmica en caso de dermatosis y pérdida excesiva de pelo. Dieta rica en proteínas 34% (con 88% de proteínas animales) y baja en carbohidratos 26,5%..</p>
-                  <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+                  <p class="card-text descripcion-larga">Juego atornilladores y puntas onsite (tactix) 100pzas</p>
+                  <p class="card-text descripcion-larga"> El mejor kit de atornilladores para los amantes de la carpinteria o aquellos que necesiten ayuda de todo tipo <p> 
+                  <a href="{%url 'productos'%}" class="btn btn-primary">Ver productos</a>
                 </div>
             </div>
             <div class="card col-md-2 offset-md-1 p-1" style="width: 18rem;">
-              <img src="/static/images/comederogato.jpg" class="card-img-top" alt="...">
+              <img src="/static/images/Medidor.webp" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-text ">COMEDERO DOBLE DISEÑO GATO es un novedoso comedero en forma de gatito con 2 contenedores, ideal para el agua y la comida.</p>
-                <a href="{%url 'productos'%}" class="btn btn-success">Ver producto</a>
+                <p class="card-text ">Medidor Láser alcance 40 metros Bosch GLM 40</p>
+                <p class="card-text descripcion-larga"> Con alcance de hasta 40 metros realiza funciones de cálculo, es posible calcular áreas, volúmenes y hasta alturas <p> 
+                <a href="{%url 'productos'%}" class="btn btn-primary">Ver productos</a>
               </div>
           </div>
             </div>
